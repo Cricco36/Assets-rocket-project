@@ -48,7 +48,7 @@ public class Movement : MonoBehaviour
     {
         if(!isDead && !hasWin){
             if(hasFuelLeft){
-                ProcessThrust();   
+                ProcessThrust();
             }else{
                 audioSource.Stop();
             }
