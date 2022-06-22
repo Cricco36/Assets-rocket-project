@@ -6,32 +6,39 @@ using UnityEngine.SceneManagement;
 public class BumpListener : MonoBehaviour
 {
 
+    [SerializeField] ParticleSystem finishParticle;
+    [SerializeField] ParticleSystem crashParticle;
+
+
     float nextLevelDelay = 5f;
+    bool isTransitioning = false;
+    bool isDying = false;
 
     Movement movementScript;
-    AudioSource audioSource;
 
-    [SerializeField] AudioClip LevelClearSFX;
     private void Start() {
-        movementScript = GetComponent<Movement>();        
-        audioSource = GetComponent<AudioSource>();
+        movementScript = GetComponent<Movement>();  
 
     }
 
     void OnCollisionEnter(Collision other) {
+        if(isTransitioning || isDying){return;}
+
         switch (other.gameObject.tag)
         {
             case "Friendly":
-
+                Debug.Log("ur on a checkpoint, congrats!");
                 break;
             case "Finish":
-                
-                Landed();
+                Finish();
                 break;
             default:
-                movementScript.Die();
+                Crash();
+                
                 break;
         }
+        
+        
     }
 
     void OnTriggerEnter(Collider other) {
@@ -41,6 +48,19 @@ public class BumpListener : MonoBehaviour
         }
         
     }
+
+    void Crash(){
+        isDying = true;
+        movementScript.Die();
+        crashParticle.Play();
+    }
+
+    void Finish(){
+        Landed();
+        finishParticle.Play();
+    }
+
+
 
     void Landed(){
         /*checkForOkLanding();     CORUTINE nextLevelDelay
@@ -53,10 +73,8 @@ public class BumpListener : MonoBehaviour
         */
         //only after
         movementScript.Win();
-        float originalPitch = audioSource.pitch;
-        audioSource.pitch = 1f;
-        audioSource.PlayOneShot(LevelClearSFX);
-        Invoke("NextLevel", LevelClearSFX.length + 1f); 
+        isTransitioning = true;
+        Invoke("NextLevel", 3f); 
     }
 
     void NextLevel(){

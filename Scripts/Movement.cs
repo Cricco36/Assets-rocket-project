@@ -10,12 +10,16 @@ public class Movement : MonoBehaviour
     [SerializeField] float steeringAmount = 150f;
 
     [Header("Gameplay")]
-    [SerializeField] float FuelRefilAmount = 50f;
+    [SerializeField] float fuelRefilAmount = 50f;
     [SerializeField] float fuel = 100f;
 
     [Header("SFX")]
     [SerializeField] AudioClip EngineSFX;
     [SerializeField] AudioClip ExplosionSFX;
+    [SerializeField] AudioClip LevelClearSFX;
+
+    [Header("Aspect")]
+    [SerializeField] ParticleSystem engineEffect;
 
 
     //PLAYER VARIABILES
@@ -41,8 +45,7 @@ public class Movement : MonoBehaviour
     void Update()
     {
         if(!isDead && !hasWin){
-            if(hasFuelLeft)
-            {
+            if(hasFuelLeft){
                 ProcessThrust();   
             }else{
                 audioSource.Stop();
@@ -55,12 +58,17 @@ public class Movement : MonoBehaviour
 
     public void Die(){
         isDead = true;
+        audioSource.Stop();
+        audioSource.PlayOneShot(ExplosionSFX);
         Invoke("Explode", explodeDelay);
         Invoke("ReloadLevel", reloadDelay);
     } 
 
     public void Win(){
         hasWin = true;
+        audioSource.Stop();
+        audioSource.PlayOneShot(LevelClearSFX);
+        engineEffect.Stop();
     }
 
     void ReloadLevel(){
@@ -73,11 +81,10 @@ public class Movement : MonoBehaviour
         float y = Random.Range(10f, 20f);
         myRigidbody.velocity = new Vector3( x, y, 0f);
         
-        audioSource.PlayOneShot(ExplosionSFX);
     }
 
     public void addFuel(){
-        fuel += FuelRefilAmount;
+        fuel += fuelRefilAmount;
         hasFuelLeft = true;
     }
 
@@ -93,6 +100,9 @@ public class Movement : MonoBehaviour
         if(!audioSource.isPlaying){
             audioSource.PlayOneShot(EngineSFX);
         }
+        if(!engineEffect.isPlaying){
+            engineEffect.Play();
+        }
     }
 
     void ProcessThrust(){
@@ -100,6 +110,9 @@ public class Movement : MonoBehaviour
             myRigidbody.AddRelativeForce(Vector3.up * engineBoost * Time.deltaTime);  // Vector3.up == (0, 1, 0);
             burnFuel();
         }else{
+            if(engineEffect.isPlaying){
+                engineEffect.Stop();
+            }
             audioSource.Stop();
         }
         
