@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: 5561053790953687875}
   - component: {fileID: 8252966221790623064}
   - component: {fileID: 1329413703}
-  - component: {fileID: 9132131065665890576}
-  - component: {fileID: 221586906}
   - component: {fileID: 5211158192899670691}
   - component: {fileID: 839057776462027340}
+  - component: {fileID: 9132131065665890576}
+  - component: {fileID: 221586906}
+  - component: {fileID: 4165357827694430483}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Untagged
@@ -164,42 +165,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &9132131065665890576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6506609804792016732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 333629f2fcf5a244cb7b617879129eb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finishParticle: {fileID: 1234505509848413807}
-  crashParticle: {fileID: 3873618436306247046}
---- !u!114 &221586906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6506609804792016732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9692b5de37e37c4ea1929f94daa6c2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  engineBoost: 800
-  steeringAmount: 125
-  fuelRefilAmount: 50
-  fuel: 100
-  EngineSFX: {fileID: 8300000, guid: 7eda86c162dbd0246955fc53eaf43939, type: 3}
-  ExplosionSFX: {fileID: 8300000, guid: 8d762353196efcc41b72b6d1d514c87f, type: 3}
-  LevelClearSFX: {fileID: 8300000, guid: 5f3897b1af8724e4e91a8b360d4e9e8f, type: 3}
-  mainExhaustEffect: {fileID: 4965244582480530088}
-  leftExhaustEffect: {fileID: 5288942677074404526}
-  rightExhaustEffect: {fileID: 6602668721906171706}
 --- !u!65 &5211158192899670691
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -226,6 +191,56 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.4805336, y: 0.5209365, z: 1}
   m_Center: {x: 0.019124985, y: -0.23953176, z: 0}
+--- !u!114 &9132131065665890576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6506609804792016732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 333629f2fcf5a244cb7b617879129eb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finishParticle: {fileID: 1234505509848413807}
+  crashParticle: {fileID: 3873618436306247046}
+  canCollide: 0
+--- !u!114 &221586906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6506609804792016732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9692b5de37e37c4ea1929f94daa6c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  engineBoost: 800
+  steeringAmount: 125
+  fuelRefilAmount: 50
+  fuel: 100
+  EngineSFX: {fileID: 8300000, guid: 7eda86c162dbd0246955fc53eaf43939, type: 3}
+  ExplosionSFX: {fileID: 8300000, guid: 8d762353196efcc41b72b6d1d514c87f, type: 3}
+  LevelClearSFX: {fileID: 8300000, guid: 5f3897b1af8724e4e91a8b360d4e9e8f, type: 3}
+  mainExhaustEffect: {fileID: 4965244582480530088}
+  leftExhaustEffect: {fileID: 5288942677074404526}
+  rightExhaustEffect: {fileID: 6602668721906171706}
+--- !u!114 &4165357827694430483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6506609804792016732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91c366ef1e4d8a548838263e6605ec85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  devKeys: 0
 --- !u!1001 &1432274280104256881
 PrefabInstance:
   m_ObjectHideFlags: 0

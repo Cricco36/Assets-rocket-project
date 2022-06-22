@@ -58,57 +58,6 @@ public class Movement : MonoBehaviour
         
     }
 
-    public void Die(){
-        isDead = true;
-        audioSource.Stop();
-        audioSource.PlayOneShot(ExplosionSFX);
-        EnableExhaustEffect("all", false);
-
-        Invoke("Explode", explodeDelay);
-        Invoke("ReloadLevel", reloadDelay);
-    }
-
-    public void Win(){
-        hasWin = true;
-        audioSource.Stop();
-        audioSource.PlayOneShot(LevelClearSFX);
-        EnableExhaustEffect("all", false);
-    }
-
-    void ReloadLevel(){
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentSceneIndex);
-    }
-    
-    void Explode(){
-        float x = Random.Range(-15f, 15f);
-        float y = Random.Range(10f, 20f);
-        myRigidbody.velocity = new Vector3( x, y, 0f);
-        
-    }
-
-    public void addFuel(){
-        fuel += fuelRefilAmount;
-        hasFuelLeft = true;
-    }
-
-    void burnFuel(){
-        if(!hasFuelLeft){
-            audioSource.Stop();
-            return;
-        }
-        fuel -= 5f * Time.deltaTime;
-        if(fuel <= 0){
-            hasFuelLeft = false;
-        }                                            //FFFFFFFFFFFFFUUUUUUUUUEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLL
-        if(!audioSource.isPlaying){
-            audioSource.PlayOneShot(EngineSFX);
-        }
-        if(!mainExhaustEffect.isPlaying){
-            EnableExhaustEffect("main", true);
-        }
-    }
-
     void ProcessThrust(){
         if(Input.GetKey(KeyCode.Space)){
             myRigidbody.AddRelativeForce(Vector3.up * engineBoost * Time.deltaTime);  // Vector3.up == (0, 1, 0);
@@ -146,6 +95,58 @@ public class Movement : MonoBehaviour
         
     }
 
+    public void Die(){
+        isDead = true;
+        audioSource.Stop();
+        audioSource.PlayOneShot(ExplosionSFX);
+        EnableExhaustEffect("all", false);
+
+        Invoke("Explode", explodeDelay);
+        Invoke("ReloadLevel", reloadDelay);
+    }
+
+    public void Win(){
+        hasWin = true;
+        audioSource.Stop();
+        audioSource.PlayOneShot(LevelClearSFX);
+        EnableExhaustEffect("all", false);
+    }
+
+    void ReloadLevel(){
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex);
+    }
+    
+    void Explode(){
+        float x = Random.Range(-15f, 15f);
+        float y = Random.Range(10f, 20f);
+        myRigidbody.velocity = new Vector3( x, y, 0f);
+        
+    }
+
+    public void addFuel(){
+        fuel += fuelRefilAmount;
+        hasFuelLeft = true;
+    }
+
+    void burnFuel(){
+        if(!hasFuelLeft){
+            audioSource.Stop();
+            EnableExhaustEffect("all", false);
+            return;
+        }
+        fuel -= 5f * Time.deltaTime;
+        if(fuel <= 0){
+            hasFuelLeft = false;
+        }                                            //FFFFFFFFFFFFFUUUUUUUUUEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLL
+        if(!audioSource.isPlaying){
+            audioSource.PlayOneShot(EngineSFX);
+        }
+        if(!mainExhaustEffect.isPlaying){
+            EnableExhaustEffect("main", true);
+        }
+    }
+    
     void ApplyRotation(float steeringRotationAmount)
     {
         myRigidbody.freezeRotation = true;
@@ -153,7 +154,6 @@ public class Movement : MonoBehaviour
         myRigidbody.freezeRotation = false;
 
     }
-
 
     void EnableExhaustEffect(string boostPosition, bool status){
         switch (boostPosition)
@@ -209,5 +209,4 @@ public class Movement : MonoBehaviour
         }
     }
 
-    
 }

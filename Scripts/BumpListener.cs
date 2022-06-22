@@ -13,16 +13,17 @@ public class BumpListener : MonoBehaviour
     float nextLevelDelay = 5f;
     bool isTransitioning = false;
     bool isDying = false;
+    public bool canCollide;
 
     Movement movementScript;
 
     private void Start() {
         movementScript = GetComponent<Movement>();  
-
+        canCollide = true;
     }
 
     void OnCollisionEnter(Collision other) {
-        if(isTransitioning || isDying){return;}
+        if(isTransitioning || isDying || !canCollide){return;}
 
         switch (other.gameObject.tag)
         {
@@ -77,7 +78,7 @@ public class BumpListener : MonoBehaviour
         Invoke("NextLevel", 3f); 
     }
 
-    void NextLevel(){
+    public void NextLevel(){
         
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
