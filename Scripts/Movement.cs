@@ -19,7 +19,9 @@ public class Movement : MonoBehaviour
     [SerializeField] AudioClip LevelClearSFX;
 
     [Header("Aspect")]
-    [SerializeField] ParticleSystem engineEffect;
+    [SerializeField] ParticleSystem mainExhaustEffect;
+    [SerializeField] ParticleSystem leftExhaustEffect;
+    [SerializeField] ParticleSystem rightExhaustEffect;
 
 
     //PLAYER VARIABILES
@@ -60,15 +62,17 @@ public class Movement : MonoBehaviour
         isDead = true;
         audioSource.Stop();
         audioSource.PlayOneShot(ExplosionSFX);
+        EnableExhaustEffect("all", false);
+
         Invoke("Explode", explodeDelay);
         Invoke("ReloadLevel", reloadDelay);
-    } 
+    }
 
     public void Win(){
         hasWin = true;
         audioSource.Stop();
         audioSource.PlayOneShot(LevelClearSFX);
-        engineEffect.Stop();
+        EnableExhaustEffect("all", false);
     }
 
     void ReloadLevel(){
@@ -100,8 +104,8 @@ public class Movement : MonoBehaviour
         if(!audioSource.isPlaying){
             audioSource.PlayOneShot(EngineSFX);
         }
-        if(!engineEffect.isPlaying){
-            engineEffect.Play();
+        if(!mainExhaustEffect.isPlaying){
+            EnableExhaustEffect("main", true);
         }
     }
 
@@ -110,10 +114,9 @@ public class Movement : MonoBehaviour
             myRigidbody.AddRelativeForce(Vector3.up * engineBoost * Time.deltaTime);  // Vector3.up == (0, 1, 0);
             burnFuel();
         }else{
-            if(engineEffect.isPlaying){
-                engineEffect.Stop();
-            }
+            EnableExhaustEffect("main", false);
             audioSource.Stop();
+
         }
         
     }
@@ -121,20 +124,29 @@ public class Movement : MonoBehaviour
     void ProcessRotation(){
         if(Input.GetKey(KeyCode.LeftArrow)){
             ApplyRotation(steeringAmount);
+            
+            EnableExhaustEffect("right", true);
         }else if(Input.GetKey(KeyCode.A)){
             ApplyRotation(steeringAmount);
+            EnableExhaustEffect("right", true);
+        }else{
+            EnableExhaustEffect("right", false);
         }
-        
+
         if (Input.GetKey(KeyCode.RightArrow)){
             ApplyRotation(-steeringAmount);
+            EnableExhaustEffect("left", true);
         }else if (Input.GetKey(KeyCode.D)){
             ApplyRotation(-steeringAmount);
+            EnableExhaustEffect("left", true);
+        }else{
+            EnableExhaustEffect("left", false);
         }
         
         
     }
 
-    private void ApplyRotation(float steeringRotationAmount)
+    void ApplyRotation(float steeringRotationAmount)
     {
         myRigidbody.freezeRotation = true;
         transform.Rotate(Vector3.forward * steeringRotationAmount * Time.deltaTime); // Vector3.Forward == (0, 0, 1);
@@ -143,4 +155,59 @@ public class Movement : MonoBehaviour
     }
 
 
+    void EnableExhaustEffect(string boostPosition, bool status){
+        switch (boostPosition)
+        {
+            case "right":
+                if(status){
+                    if(!rightExhaustEffect.isPlaying){
+                        rightExhaustEffect.Play();
+                    }
+                }else{
+                    rightExhaustEffect.Stop();
+                }
+                break;
+            case "left":
+                if(status){
+                    if(!leftExhaustEffect.isPlaying){
+                        leftExhaustEffect.Play();
+                    }
+                }else{
+                    leftExhaustEffect.Stop();
+                }
+                break;
+            case "main":
+                if(status){
+                    if(!mainExhaustEffect.isPlaying){
+                        mainExhaustEffect.Play();
+                    }
+                }else{
+                    mainExhaustEffect.Stop();
+                }
+                break;
+            case "all":
+                if(status){
+                    if(!rightExhaustEffect.isPlaying){
+                        rightExhaustEffect.Play();
+                    }                    
+                    if(!leftExhaustEffect.isPlaying){
+                        leftExhaustEffect.Play();
+                    } 
+                    if(!mainExhaustEffect.isPlaying){
+                        mainExhaustEffect.Play();
+                    } 
+                }else{
+                    mainExhaustEffect.Stop();
+                    leftExhaustEffect.Stop();
+                    rightExhaustEffect.Stop();
+                }
+                break;
+
+            default:
+                Debug.Log("No exhaust called like this");
+                break;
+        }
+    }
+
+    
 }
