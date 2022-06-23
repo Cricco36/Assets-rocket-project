@@ -413,7 +413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   engineBoost: 800
   steeringAmount: 125
-  fuelRefilAmount: 50
+  fuelRefilAmount: 25
   fuel: 100
   EngineSFX: {fileID: 8300000, guid: 7eda86c162dbd0246955fc53eaf43939, type: 3}
   ExplosionSFX: {fileID: 8300000, guid: 8d762353196efcc41b72b6d1d514c87f, type: 3}
@@ -421,6 +421,7 @@ MonoBehaviour:
   mainExhaustEffect: {fileID: 4965244582480530088}
   leftExhaustEffect: {fileID: 5288942677074404526}
   rightExhaustEffect: {fileID: 6602668721906171706}
+  fuelSlider: {fileID: 0}
 --- !u!114 &4165357827694430483
 MonoBehaviour:
   m_ObjectHideFlags: 0

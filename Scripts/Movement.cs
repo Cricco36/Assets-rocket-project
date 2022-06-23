@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
@@ -22,6 +23,7 @@ public class Movement : MonoBehaviour
     [SerializeField] ParticleSystem mainExhaustEffect;
     [SerializeField] ParticleSystem leftExhaustEffect;
     [SerializeField] ParticleSystem rightExhaustEffect;
+    [SerializeField] Slider fuelSlider;
 
 
     //PLAYER VARIABILES
@@ -30,6 +32,7 @@ public class Movement : MonoBehaviour
     bool hasWin = false;
     float reloadDelay = 3f;
     float explodeDelay = 0.5f;
+    float maxFuelCapacity = 100f;
 
 
     //COMPONENTS
@@ -41,7 +44,8 @@ public class Movement : MonoBehaviour
     {
         myRigidbody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
-
+        maxFuelCapacity = fuel;
+        updateFuelIndicator();
     }
 
     void Update()
@@ -51,6 +55,7 @@ public class Movement : MonoBehaviour
                 ProcessThrust();
             }else{
                 audioSource.Stop();
+                EnableExhaustEffect("all", false);
             }
 
             ProcessRotation();
@@ -125,8 +130,13 @@ public class Movement : MonoBehaviour
     }
 
     public void addFuel(){
+        
         fuel += fuelRefilAmount;
+        if(fuel > 100f){
+            fuel = 100f;
+        }
         hasFuelLeft = true;
+        updateFuelIndicator();
     }
 
     void burnFuel(){
@@ -135,7 +145,10 @@ public class Movement : MonoBehaviour
             EnableExhaustEffect("all", false);
             return;
         }
+
+        //BURNING FUEL
         fuel -= 5f * Time.deltaTime;
+        updateFuelIndicator();
         if(fuel <= 0){
             hasFuelLeft = false;
         }                                            //FFFFFFFFFFFFFUUUUUUUUUEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLL
@@ -147,6 +160,10 @@ public class Movement : MonoBehaviour
         }
     }
     
+    void updateFuelIndicator(){
+        fuelSlider.value = fuel / maxFuelCapacity;
+    }
+
     void ApplyRotation(float steeringRotationAmount)
     {
         myRigidbody.freezeRotation = true;
