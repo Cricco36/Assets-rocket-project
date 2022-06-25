@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3b74aab351757bc40abeeb1b0ff7b987
+guid: b3de4975ca87e7743addb951a6793a02
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -116,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlayButton_0
+      name: PlayButton 1_0
       rect:
         serializedVersion: 2
-        x: 167
-        y: 745
-        width: 638
-        height: 237
+        x: 179
+        y: 756
+        width: 591
+        height: 216
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,8 +130,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3d0d0f7e360ccc4dab22e89f603bd98
-      internalID: 1380328658
+      spriteID: f72b25f4b7c843a4f9e58489843486de
+      internalID: -885603901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayButton 1_1
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 457
+        width: 1026
+        height: 212
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c8c4d69494d9de489bdbd959b9782be
+      internalID: 363898176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayButton 1_2
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 164
+        width: 654
+        height: 216
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4efed006def6c4a47b8a4afa1bfe891e
+      internalID: 1982257755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayButton 1_3
+      rect:
+        serializedVersion: 2
+        x: 1142
+        y: 306
+        width: 558
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 319862af73acc174abebf69f56bbde9a
+      internalID: 145137623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayButton 1_4
+      rect:
+        serializedVersion: 2
+        x: 1147
+        y: 167
+        width: 509
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5b0ab3df84d34041b4c1808f9bc11ab
+      internalID: 1509394546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayButton 1_5
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 48
+        width: 492
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e521167eb48e844b8f9b17728431da5
+      internalID: -818405868
       vertices: []
       indices: 
       edges: []
@@ -139,7 +244,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 66d27d745cbc2f6439fa8f425c51adc6
+    spriteID: da9ec0ca57d0a7e43b0c2353f168e2ab
     internalID: 0
     vertices: []
     indices: 
@@ -147,7 +252,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PlayButton_0: 1380328658
+      PlayButton 1_4: 1509394546
+      PlayButton 1_0: -885603901
+      PlayButton 1_1: 363898176
+      PlayButton 1_2: 1982257755
+      PlayButton 1_5: -818405868
+      PlayButton 1_3: 145137623
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
